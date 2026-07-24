@@ -1,22 +1,29 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+const express = require('express');
+const cors = require('cors');
+const config = require('./config/config');
+const requestLogger = require('./middleware/requestLogger');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
+const translateRoutes = require('./routes/translateRoutes');
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Core middleware
+app.use(cors({ origin: config.corsOrigin }));
+app.use(express.json({ limit: '1mb' }));
+app.use(requestLogger);
 
-// Test Route
-app.get("/", (req, res) => {
-    res.send("Language Translator Backend is Running!");
+// Health check
+app.get('/', (req, res) => {
+  res.json({ success: true, message: 'Scriptorium translator API is running.' });
 });
 
-// Port
-const PORT = process.env.PORT || 5000;
+// API routes
+app.use('/api', translateRoutes);
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+// 404 + error handling (must be last)
+app.use(notFound);
+app.use(errorHandler);
+
+app.listen(config.port, () => {
+  console.log(`Scriptorium backend listening on http://localhost:${config.port}`);
 });
