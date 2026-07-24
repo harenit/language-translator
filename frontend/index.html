@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scriptorium — Multilingual Translator</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+<!-- Display, body and utility faces -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Script-accurate fonts for rendering translated text correctly -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&family=Noto+Sans+Devanagari&family=Noto+Sans+Telugu&family=Noto+Sans+Kannada&family=Noto+Sans+Bengali&family=Noto+Sans+Malayalam&family=Noto+Sans+SC&family=Noto+Sans+JP&family=Noto+Sans+KR&family=Noto+Naskh+Arabic&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Living manuscript backdrop: scattered glyphs from the active background-script language -->
+  <div id="scriptBackdrop" class="script-backdrop" aria-hidden="true"></div>
+
+  <div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="assets/logo.svg" alt="" class="brand__mark">
+        <div>
+          <p class="brand__name">Scriptorium</p>
+          <p class="brand__tag">a page for every tongue</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html" class="nav__link nav__link--active">Translate</a>
+        <a href="pages/history.html" class="nav__link">History</a>
+        <a href="pages/about.html" class="nav__link">About</a>
+      </nav>
+
+      <div class="panel">
+        <p class="panel__title">Background script</p>
+        <p class="panel__hint">The backdrop redraws itself in this language's letterforms.</p>
+        <select id="backdropLangSelect" class="control"></select>
+      </div>
+
+      <div class="panel">
+        <p class="panel__title">Appearance</p>
+
+        <label class="field">
+          <span class="field__label">Accent color</span>
+          <input type="color" id="accentPicker" class="color-input" value="#e7b84b">
+        </label>
+
+        <label class="field field--row">
+          <span class="field__label">Light mode</span>
+          <input type="checkbox" id="modeToggle" class="switch">
+        </label>
+
+        <label class="field">
+          <span class="field__label">Ink density <span id="densityValue" class="field__value">55</span></span>
+          <input type="range" id="densitySlider" min="10" max="120" value="55" class="control">
+        </label>
+
+        <button id="resetTheme" class="btn btn--ghost btn--small">Reset appearance</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dashboard">
+      <header class="hero">
+        <h1 class="hero__title">Speak it here, <em>read it there.</em></h1>
+        <p class="hero__subtitle">Pick two languages, drop in your text, and let the page turn into whichever script you're reading.</p>
+      </header>
+
+      <section class="card translator" aria-label="Translator">
+        <div class="translator__grid">
+
+          <div class="translator__pane">
+            <div class="pane__head">
+              <select id="sourceLang" class="control control--pane"></select>
+              <span id="sourceCount" class="pane__count">0 / 500</span>
+            </div>
+            <textarea id="sourceText" class="textarea" maxlength="500" placeholder="Type or paste text to translate…"></textarea>
+          </div>
+
+          <button id="swapLangs" class="swap-btn" title="Swap languages" aria-label="Swap languages">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>
+          </button>
+
+          <div class="translator__pane">
+            <div class="pane__head">
+              <select id="targetLang" class="control control--pane"></select>
+              <button id="copyResult" class="icon-btn" title="Copy translation" aria-label="Copy translation">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></svg>
+              </button>
+            </div>
+            <textarea id="targetText" class="textarea" readonly placeholder="Translation appears here…"></textarea>
+          </div>
+        </div>
+
+        <div class="translator__actions">
+          <p id="statusMsg" class="status" role="status"></p>
+          <button id="translateBtn" class="btn btn--primary">Translate</button>
+        </div>
+      </section>
+
+      <section class="card recent" aria-label="Recent translations">
+        <div class="recent__head">
+          <p class="panel__title">Recent</p>
+          <a href="pages/history.html" class="link">View all</a>
+        </div>
+        <ul id="recentList" class="recent__list">
+          <li class="recent__empty">Your last few translations will show up here.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
