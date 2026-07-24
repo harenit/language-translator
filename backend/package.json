@@ -7,11 +7,16 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": ["translator", "dashboard", "express", "api"],
+  "keywords": [
+    "translator",
+    "dashboard",
+    "express",
+    "api"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "^1.18.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2"

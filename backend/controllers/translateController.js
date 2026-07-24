@@ -1,4 +1,4 @@
-const translateService = require('../services/translateService');
+const translateService = require('../services/translatorService');
 const TranslationStore = require('../models/Translation');
 const asyncHandler = require('../utils/asyncHandler');
 const ApiError = require('../utils/ApiError');
