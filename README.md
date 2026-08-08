@@ -9,3 +9,4 @@ A web application that translates text from one language to another.
 ## Tech Stack
 - Frontend: HTML, CSS, JavaScript
 - Backend: Node.js, Express.js
+Jenkins CI test
